@@ -4,9 +4,11 @@
 #include "functions.hpp"
 
 // 风云宴 韩湘子2
-int banquetRule9(BanquetStrictRule **, BanquetLenientRule **, States &, int);
+int banquetRule9(BanquetStrictRule **, BanquetLenientRule **, States const &,
+                 int);
 // 风云宴 蓝采和2
-int banquetRule10(BanquetStrictRule **, BanquetLenientRule **, States &, int);
+int banquetRule10(BanquetStrictRule **, BanquetLenientRule **, States const &,
+                  int);
 
 /**
  * @brief
@@ -16,7 +18,7 @@ int banquetRule10(BanquetStrictRule **, BanquetLenientRule **, States &, int);
  * @param bestfull
  * @return void
  */
-void banquetRule(BanquetRule *const &rule, States &s, int *bestfull) {
+void banquetRule(BanquetRule *const &rule, States const &s, int *bestfull) {
     BanquetStrictRule
         *strictRule[NUM_CHEFS *
                     DISH_PER_CHEF]; // 下一阶段的规则，不受意图生效次数的影响
@@ -32,7 +34,7 @@ void banquetRule(BanquetRule *const &rule, States &s, int *bestfull) {
 
 // 风云宴 韩湘子2
 int banquetRule9(BanquetStrictRule **strictRule,
-                 BanquetLenientRule **lenientRule, States &s, int rank) {
+                 BanquetLenientRule **lenientRule, States const &s, int rank) {
     int d = rank * DISH_PER_CHEF * CHEFS_PER_GUEST;
     // 第1轮
     // 条件：三道炸：下两阶段煮技法料理饱腹感+1
@@ -127,7 +129,7 @@ int banquetRule9(BanquetStrictRule **strictRule,
 
 // 风云宴 蓝采和2
 int banquetRule10(BanquetStrictRule **strictRule,
-                  BanquetLenientRule **lenientRule, States &s, int rank) {
+                  BanquetLenientRule **lenientRule, States const &s, int rank) {
     int d = rank * DISH_PER_CHEF * CHEFS_PER_GUEST;
     // 第1轮
     // 条件：三道切：下两阶段切技法料理饱腹感-2

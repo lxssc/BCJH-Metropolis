@@ -7,11 +7,10 @@
 #include "../config.hpp"
 #include "../src/Chef.hpp"
 
-
 class SARunner;
 struct States {
     Chef *chef[NUM_CHEFS];
-    AbilityEnum toolCKPT[NUM_CHEFS];
+    ToolEnum toolCKPT[NUM_CHEFS];
     Recipe *recipe[DISH_PER_CHEF * NUM_CHEFS];
 };
 namespace r00 {
@@ -38,14 +37,9 @@ States randomChef(States, CList *, RList *);
 
 } // namespace r
 namespace e0 {
-int sumPrice(States s, CList *c = NULL, RList *r = NULL, int log = false,
+int sumPrice(States const &s, CList *c = NULL, RList *r = NULL, int log = false,
              bool exactChefTool = false);
 }
-namespace e {
-
-typedef int (*GetEnergy)(States, CList *, RList *,  bool);
-int getTotalPrice(States s, CList *c, RList *r,  bool vb = false);
-} // namespace e
 
 namespace f {
 typedef double (*CoolingSchedule)(int, int, double, double);

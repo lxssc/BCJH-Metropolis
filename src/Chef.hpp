@@ -23,7 +23,7 @@ class Chef {
     bool male;
     bool female;
     int id;
-    AbilityEnum tool = NOT_EQUIPPED;
+    ToolEnum tool = NOT_EQUIPPED;
     std::string name;
     Skill skill;
     std::vector<Recipe *> recipeCapable;
@@ -47,13 +47,13 @@ class Chef {
     Chef(Json::Value &v, int ultimateSkillId);
     Chef() {}
     void print();
-    void modifyTool(AbilityEnum);
-    Chef addTool_modify_name(AbilityEnum);
+    void modifyTool(ToolEnum);
+    Chef addTool_modify_name(ToolEnum);
 };
 typedef std::vector<Chef> CList;
 void loadChef(CList &chefList);
 
 // void loadChefTools(CList &chefList, CList &newChefList);
-std::string getToolName(AbilityEnum tool);
+std::string getToolName(ToolEnum tool);
 
 #endif

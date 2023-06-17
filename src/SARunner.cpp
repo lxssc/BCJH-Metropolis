@@ -12,8 +12,7 @@
 // #include "activityRule.hpp"
 #include <limits.h>
 SARunner::SARunner(CList *chefList, RList *recipeList, int stepMax, int tMax,
-                   int tMin, e::GetEnergy getEnergyFunc,
-                   r::RandomMove randomMoveFunc,
+                   int tMin, r::RandomMove randomMoveFunc,
                    f::CoolingSchedule coolingScheduleFunc) {
     this->chefList = chefList;
     this->recipeList = recipeList;
@@ -23,7 +22,6 @@ SARunner::SARunner(CList *chefList, RList *recipeList, int stepMax, int tMax,
     this->tMax = tMax;
     this->tMin = tMin;
     this->history = new History[stepMax];
-    this->getEnergyFunc = getEnergyFunc;
 #ifdef SEARCH_TARGET_SCORE
     // if (MODE != 2) {
     //     std::cout << "config.hpp中改了不该改的东西，请改回来" << std::endl;
@@ -89,7 +87,7 @@ States SARunner::run(States *s0, bool progress, bool silent,
     } else {
         s = *s0;
     }
-    int energy = getEnergyFunc(s, this->chefList, this->recipeList, false);
+    int energy = e0::sumPrice(s, this->chefList, this->recipeList, false);
     // std::cout << "Initial energy: " << energy << std::endl;
     this->bestState = s;
     this->bestEnergy = energy;
@@ -122,7 +120,7 @@ States SARunner::run(States *s0, bool progress, bool silent,
         // std::cin >> step;
         // print(newS);
         int newEnergy =
-            getEnergyFunc(newS, this->chefList, this->recipeList, false);
+            e0::sumPrice(newS, this->chefList, this->recipeList, false);
         double prob = 0;
         int delta = energy - newEnergy;
         if (delta / t < -30) {
@@ -209,6 +207,6 @@ void SARunner::print(States s, bool verbose) {
         //         getPrice(*s.chef[i], *s.recipe[r++], true);
         //     }
         // }
-        this->getEnergyFunc(s, this->chefList, this->recipeList, true);
+        e0::sumPrice(s, this->chefList, this->recipeList, true);
     }
 }

@@ -24,7 +24,6 @@ class SARunner {
     int tMin;
     CList *chefList;
     RList *recipeList;
-    e::GetEnergy getEnergyFunc;
     int targetScore;
 
     States bestState;
@@ -48,7 +47,6 @@ class SARunner {
      */
     SARunner(
         CList *chefList, RList *recipeList, int stepMax, int tMax, int tMin,
-        e::GetEnergy getEnergyFunc = e::getTotalPrice,
         r::RandomMove randomMoveFun = r::randomRecipe,
         f::CoolingSchedule coolingScheduleFunc = f::exponential_multiplicative);
     States run(States *s = NULL, bool progress = false, bool silent = false,

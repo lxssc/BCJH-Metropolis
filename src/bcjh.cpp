@@ -35,10 +35,9 @@ void parseArgs(int argc, char *argv[], bool &silent, int &log,
 }
 
 int main(int argc, char *argv[]) {
-    int opt;
     bool silent = false;
     int log = 0; // 0x0: 无输出 0x1: 正常输出 0x10: 详细输出
-    int seed = time(NULL);
+    int seed = (int)time(NULL);
     bool calculate = false;
     parseArgs(argc, argv, silent, log, calculate);
     seed = 1686995027;
@@ -80,7 +79,7 @@ int main(int argc, char *argv[]) {
 }
 int run(CList &chefList, RList &recipeList, int log, bool silent) {
     SARunner saRunner(&chefList, &recipeList, ITER_CHEF, T_MAX_CHEF, 0,
-                      e::getTotalPrice, r::randomChef, f::t_dist_slow);
+                      r::randomChef, f::t_dist_slow);
     // std::cout << log << std::endl;
     States s = saRunner.run(NULL, true, silent);
 
@@ -91,8 +90,8 @@ int run(CList &chefList, RList &recipeList, int log, bool silent) {
               << std::endl;
     if (!silent) {
         SARunner saRunnerPrint(&chefList, &recipeList, ITER_RECIPE,
-                               T_MAX_RECIPE, 0, e::getTotalPrice,
-                               r::randomRecipe, f::t_dist_fast);
+                               T_MAX_RECIPE, 0, r::randomRecipe,
+                               f::t_dist_fast);
         saRunnerPrint.run(&s, false, silent, "../out/recipe");
     }
     return score;
