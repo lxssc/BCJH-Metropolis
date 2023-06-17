@@ -14,6 +14,9 @@ ToolEnum toolHeuristic(States &s, int chefId) {
     }
     if (chef->tool == NO_TOOL)
         return NO_TOOL;
+    if (rand() % 10 == 0) {
+        return ToolEnum(rand() % 6);
+    }
     ToolEnum best = NOT_EQUIPPED;
     chef->modifyTool(NOT_EQUIPPED);
     int max = 0;
