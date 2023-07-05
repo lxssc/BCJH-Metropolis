@@ -85,6 +85,9 @@ void loadChef(CList &chefList) {
             if (AVOID_CHEF_3 && chef["rarity"].asInt() == 3) {
                 continue;
             }
+             if (AVOID_CHEF_4 && chef["rarity"].asInt() == 4) {
+                continue;
+            }
 
             if (ultimateSkills.find(id) != ultimateSkills.end()) {
                 chefList.push_back(Chef(chef, ultimateSkills[id]));
